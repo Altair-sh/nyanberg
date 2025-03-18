@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { ModuleRegistry, AllCommunityModule } from 'ag-grid-community'
 
 export const metadata: Metadata = {
     title: 'Create Next App',
@@ -11,6 +12,7 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode
 }>) {
+    ModuleRegistry.registerModules([AllCommunityModule])
     return (
         <html lang="en">
             <head>
