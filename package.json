@@ -1,0 +1,24 @@
+{
+    "name": "nyanberg",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev --turbopack",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "format": "npx prettier src --write"
+    },
+    "dependencies": {
+        "next": "15.2",
+        "react": "^19.0",
+        "react-dom": "^19.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "prettier": "^3",
+        "typescript": "^5"
+    }
+}
