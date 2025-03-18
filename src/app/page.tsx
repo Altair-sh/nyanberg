@@ -2,13 +2,25 @@
 import { AgGridReact } from 'ag-grid-react'
 import styles from './page.module.css'
 import { AllCommunityModule, themeQuartz } from 'ag-grid-community'
-import { useMemo } from 'react'
+import { useState, useEffect } from 'react'
 import { colorSchemeDark } from 'ag-grid-community'
-import { useTheme } from 'next-themes'
 
 export default function Home() {
-    const { theme } = useTheme()
-    const agTheme = useMemo(() => (theme === 'dark' ? themeQuartz.withPart(colorSchemeDark) : themeQuartz), [theme])
+    const [agTheme, setAgTheme] = useState(themeQuartz)
+
+    useEffect(() => {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        setAgTheme(prefersDark ? themeQuartz.withPart(colorSchemeDark) : themeQuartz)
+
+        const listener = (e: MediaQueryListEvent) => {
+            setAgTheme(e.matches ? themeQuartz.withPart(colorSchemeDark) : themeQuartz)
+        }
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', listener)
+        return () => {
+            window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', listener)
+        }
+    }, [])
 
     return (
         <div className={styles.page} style={{ height: '500px' }}>
